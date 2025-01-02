@@ -3,6 +3,21 @@ let todoList = [];
 // Fetch todos from backend when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     fetchTodos();
+
+    // Add event listener to detect Enter key in the input field
+    const inputElement = document.querySelector('.js-name-input');
+    inputElement.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            addList();
+        }
+    });
+
+    const dateElement = document.querySelector('.js-due-date-input');
+    dateElement.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            addList();
+        }
+    });
 });
 
 // Fetch the todo list from the backend
@@ -27,7 +42,7 @@ function renderTodoList() {
     let todoListHTML = '';
 
     for (let i = 0; i < todoList.length; i++) {
-        const { todoName, dueDate, _id } = todoList[i]; // Use correct field names
+        const { todoName, dueDate, _id } = todoList[i]; 
 
         const html = `
             
@@ -54,7 +69,7 @@ function renderTodoList() {
 // Add a new todo item
 function addList(event) {
     const inputElement = document.querySelector('.js-name-input');
-    const todoName = inputElement.value; // Update 'name' to 'todoName'
+    const todoName = inputElement.value; 
 
     const dateElement = document.querySelector('.js-due-date-input');
     const dueDate = dateElement.value;
@@ -64,7 +79,7 @@ function addList(event) {
         return;
     }
 
-    const newTodo = { todoName, dueDate }; // Update object to match backend
+    const newTodo = { todoName, dueDate }; 
 
     fetch('http://localhost:5000/api/tasks', {
         method: 'POST',
@@ -99,7 +114,7 @@ function deleteTodo(id) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                const index = todoList.findIndex(todo => todo._id === id); // Use _id
+                const index = todoList.findIndex(todo => todo._id === id); 
                 if (index !== -1) {
                     todoList.splice(index, 1); // Remove the todo from the list
                     renderTodoList();
@@ -110,3 +125,5 @@ function deleteTodo(id) {
         })
         .catch(error => console.error('Error deleting todo:', error));
 }
+
+document.querySelector('.')
