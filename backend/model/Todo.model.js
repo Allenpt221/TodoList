@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const TodoListSchema = mongoose.Schema({
     todoName: {
         type: String,
-        require: true,
+        required: true,
     },
     dueDate: {
         type: String,
-        require: true
-    },
+        required: true
+    }
 }, {
     timestamp: true,
 });
